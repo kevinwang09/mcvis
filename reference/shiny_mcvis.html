@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcvis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.11</span>
       </span>
     </div>
 
@@ -112,7 +112,7 @@
     <p>Shiny app for mcvis exploration</p>
     </div>
 
-    <pre class="usage"><span class='fu'>shiny_mcvis</span>(<span class='no'>mcvis_result</span>)</pre>
+    <pre class="usage"><span class='fu'>shiny_mcvis</span>(<span class='no'>mcvis_result</span>, <span class='no'>X</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -120,6 +120,10 @@
     <tr>
       <th>mcvis_result</th>
       <td><p>Output of the mcvis function.</p></td>
+    </tr>
+    <tr>
+      <th>X</th>
+      <td><p>The original X matrix</p></td>
     </tr>
     </table>
 
@@ -132,7 +136,7 @@
 <span class='no'>p</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span>(<span class='no'>artificialeg</span>)[<span class='fl'>2</span>]-<span class='fl'>1</span>
 <span class='no'>X</span> <span class='kw'>=</span> <span class='no'>artificialeg</span>[,<span class='fl'>1</span>:<span class='no'>p</span>]
 <span class='no'>mcvis_result</span> <span class='kw'>=</span> <span class='fu'><a href='mcvis.html'>mcvis</a></span>(<span class='no'>X</span>)
-<span class='fu'>shiny_mcvis</span>(<span class='no'>mcvis_result</span>)
+<span class='fu'>shiny_mcvis</span>(<span class='no'>mcvis_result</span>, <span class='no'>X</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

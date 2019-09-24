@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcvis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.11</span>
       </span>
     </div>
 
@@ -112,7 +112,7 @@
     <p>Multi-collinearity Visualization</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mcvis</span>(<span class='no'>X</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"bootstrap"</span>, <span class='kw'>steps</span> <span class='kw'>=</span> <span class='fl'>1000L</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</pre>
+    <pre class="usage"><span class='fu'>mcvis</span>(<span class='no'>X</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"bootstrap"</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>1000L</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -127,7 +127,7 @@
 Currently supports "bootstrap" or "cv" (cross-validation).</p></td>
     </tr>
     <tr>
-      <th>steps</th>
+      <th>times</th>
       <td><p>Number of resampling runs we perform. Default is set to 1000.</p></td>
     </tr>
     <tr>
@@ -151,30 +151,30 @@ Currently supports "bootstrap" or "cv" (cross-validation).</p></td>
 <span class='no'>p</span> <span class='kw'>=</span> <span class='fl'>10</span>
 <span class='no'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>
 <span class='no'>X</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>*<span class='no'>p</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='no'>p</span>)
-<span class='no'>X</span>[,<span class='fl'>1</span>] <span class='kw'>=</span> <span class='no'>X</span>[,<span class='fl'>2</span>] + <span class='no'>X</span>[,<span class='fl'>3</span>] + <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>, <span class='fl'>0</span>, <span class='fl'>0.1</span>)
+<span class='no'>X</span>[,<span class='fl'>1</span>] <span class='kw'>=</span> <span class='no'>X</span>[,<span class='fl'>2</span>] + <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>, <span class='fl'>0</span>, <span class='fl'>0.1</span>)
 <span class='no'>mcvis_result</span> <span class='kw'>=</span> <span class='fu'>mcvis</span>(<span class='no'>X</span>)
-<span class='no'>mcvis_result</span>$<span class='no'>MC</span></div><div class='output co'>#&gt;             col1       col2       col3         col4         col5         col6
-#&gt; tau10 0.51176833 0.23356262 0.18530682 5.794124e-03 1.956601e-02 8.241155e-03
-#&gt; tau9  0.18954718 0.05582030 0.10974693 2.242612e-01 1.922421e-02 1.391731e-02
-#&gt; tau8  0.26393131 0.12724836 0.12260071 6.323172e-02 4.488702e-02 1.482363e-01
-#&gt; tau7  0.21164243 0.09668578 0.12048910 4.915850e-02 8.084175e-02 8.612692e-02
-#&gt; tau6  0.10240685 0.08530655 0.05976011 9.486651e-02 1.192905e-01 1.335532e-01
-#&gt; tau5  0.09239208 0.14014434 0.05298829 1.620782e-02 8.244494e-02 2.128902e-02
-#&gt; tau4  0.04232123 0.03532059 0.04870816 6.903832e-02 1.246710e-01 5.454640e-02
-#&gt; tau3  0.04530333 0.02762711 0.03161900 2.563378e-01 1.046091e-01 8.564887e-02
-#&gt; tau2  0.01359146 0.01702145 0.02023582 1.222307e-01 5.794797e-02 2.189361e-01
-#&gt; tau1  0.50482360 0.23264155 0.26253164 3.449305e-07 3.404215e-07 2.812451e-07
-#&gt;               col7         col8         col9        col10
-#&gt; tau10 8.686841e-03 6.945818e-03 4.148424e-03 1.597986e-02
-#&gt; tau9  2.730120e-02 2.235433e-01 3.402609e-02 1.026122e-01
-#&gt; tau8  4.279712e-02 7.834091e-02 3.639241e-02 7.233408e-02
-#&gt; tau7  5.050651e-02 1.358341e-01 8.784228e-02 8.087264e-02
-#&gt; tau6  7.978700e-02 1.247101e-01 6.527401e-02 1.350451e-01
-#&gt; tau5  3.925549e-01 3.921027e-02 6.513683e-02 9.763149e-02
-#&gt; tau4  1.718506e-01 2.832636e-01 5.744919e-02 1.128309e-01
-#&gt; tau3  7.051482e-02 2.775603e-01 2.779688e-02 7.298282e-02
-#&gt; tau2  6.498623e-02 9.937120e-02 2.833542e-01 1.023249e-01
-#&gt; tau1  2.369360e-07 8.090066e-07 9.649026e-07 2.182271e-07</div></pre>
+<span class='no'>mcvis_result</span>$<span class='no'>MC</span></div><div class='output co'>#&gt;             col1       col2         col3         col4         col5         col6
+#&gt; tau10 0.14701287 0.14285974 1.136328e-01 1.060217e-01 1.951976e-01 4.660954e-02
+#&gt; tau9  0.04108070 0.04189547 4.693237e-02 1.949351e-01 3.103417e-02 6.347347e-02
+#&gt; tau8  0.05139324 0.04737206 5.911953e-02 8.870051e-02 5.786134e-02 2.842978e-01
+#&gt; tau7  0.07862278 0.07575412 1.514919e-01 6.395951e-02 9.994462e-02 1.363126e-01
+#&gt; tau6  0.19769379 0.18387550 6.558588e-02 4.496432e-02 1.104867e-01 5.636113e-02
+#&gt; tau5  0.07400850 0.07443780 4.513472e-02 3.990867e-02 1.629288e-01 8.572762e-02
+#&gt; tau4  0.05543736 0.05529547 7.698517e-02 7.321415e-02 1.055137e-01 5.008014e-02
+#&gt; tau3  0.01668305 0.01692978 1.651141e-01 2.396578e-01 7.866797e-02 8.583086e-02
+#&gt; tau2  0.03853489 0.03632742 7.187693e-02 8.924278e-02 5.014429e-02 1.585120e-01
+#&gt; tau1  0.50558487 0.49384693 3.195829e-05 3.029062e-05 5.760717e-05 2.572082e-05
+#&gt;               col7         col8        col9        col10
+#&gt; tau10 4.706835e-02 0.1312687994 0.038649558 3.167905e-02
+#&gt; tau9  8.343543e-02 0.2240965730 0.055015074 2.181017e-01
+#&gt; tau8  1.240844e-01 0.1400292747 0.085953945 6.118790e-02
+#&gt; tau7  5.181567e-02 0.2035177765 0.034524450 1.040566e-01
+#&gt; tau6  6.556780e-02 0.1163242488 0.088534166 7.060646e-02
+#&gt; tau5  3.372278e-01 0.0449693309 0.043493193 9.216362e-02
+#&gt; tau4  2.306835e-01 0.2590903931 0.060377630 3.332247e-02
+#&gt; tau3  7.923816e-02 0.2292770959 0.025943729 6.265754e-02
+#&gt; tau2  5.185136e-02 0.0440411814 0.349402073 1.100670e-01
+#&gt; tau1  7.879385e-05 0.0000475382 0.000200574 9.571424e-05</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
