@@ -112,7 +112,8 @@
     <p>Multi-collinearity Visualization</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mcvis</span>(<span class='no'>X</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"bootstrap"</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>1000L</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</pre>
+    <pre class="usage"><span class='fu'>mcvis</span>(<span class='no'>X</span>, <span class='kw'>sampling_method</span> <span class='kw'>=</span> <span class='st'>"bootstrap"</span>,
+  <span class='kw'>standardise_method</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>, <span class='kw'>times</span> <span class='kw'>=</span> <span class='fl'>1000L</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -122,9 +123,16 @@
       <td><p>A matrix of regressors (without intercept terms).</p></td>
     </tr>
     <tr>
-      <th>method</th>
+      <th>sampling_method</th>
       <td><p>The resampling method for the data.
 Currently supports "bootstrap" or "cv" (cross-validation).</p></td>
+    </tr>
+    <tr>
+      <th>standardise_method</th>
+      <td><p>The standardisation method for the data.
+Currently supports "euclidean" (default, centred by mean and divide by Euclidiean length)
+and "studentise" (centred by mean and divide by standard deviation)
+and "none" (no standardisation)</p></td>
     </tr>
     <tr>
       <th>times</th>
