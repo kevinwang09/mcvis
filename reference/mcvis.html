@@ -147,10 +147,9 @@ and "none" (no standardisation)</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list of outputs:</p><ul>
-<li><p>X: The original matrix of regressors (for plotting purposes)</p></li>
-<li><p>t_square: The t^2 statistics for the regression between the VIFs and the tau's.</p></li>
-<li><p>MC: The MC indices</p></li>
-<li><p>col.names: Column names (for plotting purposes)</p></li>
+<li><p>t_square:The t^2 statistics for the regression between the VIFs and the tau's.</p></li>
+<li><p>MC:The MC indices</p></li>
+<li><p>col_names:Column names (export for plotting purposes)</p></li>
 </ul>
 
 
@@ -161,7 +160,7 @@ and "none" (no standardisation)</p></td>
 <span class='no'>X</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>*<span class='no'>p</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='no'>p</span>)
 <span class='no'>X</span>[,<span class='fl'>1</span>] <span class='kw'>=</span> <span class='no'>X</span>[,<span class='fl'>2</span>] + <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>, <span class='fl'>0</span>, <span class='fl'>0.1</span>)
 <span class='no'>mcvis_result</span> <span class='kw'>=</span> <span class='fu'>mcvis</span>(<span class='no'>X</span>)
-<span class='no'>mcvis_result</span>$<span class='no'>MC</span></div><div class='output co'>#&gt;             col1       col2         col3         col4         col5         col6
+<span class='no'>mcvis_result</span>$<span class='no'>MC</span></div><div class='output co'>#&gt;              X01        X02          X03          X04          X05          X06
 #&gt; tau10 0.14701287 0.14285974 1.136328e-01 1.060217e-01 1.951976e-01 4.660954e-02
 #&gt; tau9  0.04108070 0.04189547 4.693237e-02 1.949351e-01 3.103417e-02 6.347347e-02
 #&gt; tau8  0.05139324 0.04737206 5.911953e-02 8.870051e-02 5.786134e-02 2.842978e-01
@@ -172,7 +171,7 @@ and "none" (no standardisation)</p></td>
 #&gt; tau3  0.01668305 0.01692978 1.651141e-01 2.396578e-01 7.866797e-02 8.583086e-02
 #&gt; tau2  0.03853489 0.03632742 7.187693e-02 8.924278e-02 5.014429e-02 1.585120e-01
 #&gt; tau1  0.50558487 0.49384693 3.195829e-05 3.029062e-05 5.760717e-05 2.572082e-05
-#&gt;               col7         col8        col9        col10
+#&gt;                X07          X08         X09          X10
 #&gt; tau10 4.706835e-02 0.1312687994 0.038649558 3.167905e-02
 #&gt; tau9  8.343543e-02 0.2240965730 0.055015074 2.181017e-01
 #&gt; tau8  1.240844e-01 0.1400292747 0.085953945 6.118790e-02
