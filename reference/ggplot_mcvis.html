@@ -41,11 +41,11 @@ the magnitude of the MC-index for the tau1, which is the inverse of the smallest
 Under this ordering,
 the first entry of the matrix is classified as a &quot;category 5&quot; thickness in plotting
 Subsequently, other lines are sequentially put in the categories of
-category 5: anything equal or above the first entry of the matrix
-category 4: anything above 90 % of the first entry of the matrix
-category 3: anything above 70 % of the first entry of the matrix
-category 2: anything above 50 % of the first entry of the matrix
-category 1: anything above 10 % of the first entry of the matrix
+category 5: 0.5 or above
+category 4: 0.3 - 0.5
+category 3: 0.2 - 0.3
+category 2: 0.1 - 0.2
+category 1: 0.0 - 0.1
 
 " />
 <meta name="twitter:card" content="summary" />
@@ -125,16 +125,16 @@ the magnitude of the MC-index for the tau1, which is the inverse of the smallest
 Under this ordering,
 the first entry of the matrix is classified as a "category 5" thickness in plotting
 Subsequently, other lines are sequentially put in the categories of</p><ul>
-<li><p>category 5: anything equal or above the first entry of the matrix</p></li>
-<li><p>category 4: anything above 90 % of the first entry of the matrix</p></li>
-<li><p>category 3: anything above 70 % of the first entry of the matrix</p></li>
-<li><p>category 2: anything above 50 % of the first entry of the matrix</p></li>
-<li><p>category 1: anything above 10 % of the first entry of the matrix</p></li>
+<li><p>category 5: 0.5 or above</p></li>
+<li><p>category 4: 0.3 - 0.5</p></li>
+<li><p>category 3: 0.2 - 0.3</p></li>
+<li><p>category 2: 0.1 - 0.2</p></li>
+<li><p>category 1: 0.0 - 0.1</p></li>
 </ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>ggplot_mcvis</span>(<span class='no'>mcvis_result</span>, <span class='kw'>eig_max</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>mcvis_result</span>$<span class='no'>MC</span>),
+    <pre class="usage"><span class='fu'>ggplot_mcvis</span>(<span class='no'>mcvis_result</span>, <span class='kw'>eig_max</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
   <span class='kw'>var_max</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>mcvis_result</span>$<span class='no'>MC</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -165,7 +165,7 @@ Subsequently, other lines are sequentially put in the categories of</p><ul>
 <span class='no'>X</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>*<span class='no'>p</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='no'>p</span>)
 <span class='no'>X</span>[,<span class='fl'>1</span>] <span class='kw'>=</span> <span class='no'>X</span>[,<span class='fl'>2</span>] + <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>, <span class='fl'>0</span>, <span class='fl'>0.1</span>)
 <span class='no'>mcvis_result</span> <span class='kw'>=</span> <span class='fu'><a href='mcvis.html'>mcvis</a></span>(<span class='no'>X</span>)
-<span class='fu'>ggplot_mcvis</span>(<span class='no'>mcvis_result</span>)</div><div class='img'><img src='ggplot_mcvis-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggplot_mcvis</span>(<span class='no'>mcvis_result</span>, <span class='kw'>eig_max</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='ggplot_mcvis-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>ggplot_mcvis</span>(<span class='no'>mcvis_result</span>)</div><div class='img'><img src='ggplot_mcvis-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>ggplot_mcvis</span>(<span class='no'>mcvis_result</span>, <span class='kw'>eig_max</span> <span class='kw'>=</span> <span class='no'>p</span>)</div><div class='img'><img src='ggplot_mcvis-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
