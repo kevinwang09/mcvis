@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcvis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -167,29 +167,18 @@ and "none" (no standardisation)</p></td>
 <span class='no'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>
 <span class='no'>X</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>*<span class='no'>p</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='no'>p</span>)
 <span class='no'>X</span>[,<span class='fl'>1</span>] <span class='kw'>=</span> <span class='no'>X</span>[,<span class='fl'>2</span>] + <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='no'>n</span>, <span class='fl'>0</span>, <span class='fl'>0.1</span>)
-<span class='no'>mcvis_result</span> <span class='kw'>=</span> <span class='fu'>mcvis</span>(<span class='no'>X</span>)
-<span class='no'>mcvis_result</span>$<span class='no'>MC</span></div><div class='output co'>#&gt;              X01        X02          X03          X04          X05          X06
-#&gt; tau1  0.17286707 0.17003416 1.365326e-01 7.715942e-02 2.080858e-01 2.109029e-02
-#&gt; tau2  0.03802761 0.03857424 5.980017e-02 1.675966e-01 3.418178e-02 6.761799e-02
-#&gt; tau3  0.06837209 0.06579550 7.323871e-02 7.763574e-02 5.297199e-02 2.206392e-01
-#&gt; tau4  0.08301574 0.08050919 1.256090e-01 4.937381e-02 8.693397e-02 1.425582e-01
-#&gt; tau5  0.16564258 0.15656910 8.899184e-02 6.540339e-02 1.317904e-01 4.782266e-02
-#&gt; tau6  0.10231168 0.10305580 4.433498e-02 3.331776e-02 1.634168e-01 7.240703e-02
-#&gt; tau7  0.05642340 0.05645476 7.470697e-02 7.744105e-02 9.743556e-02 5.265785e-02
-#&gt; tau8  0.01919544 0.01947673 1.689389e-01 2.291153e-01 8.726378e-02 8.738823e-02
-#&gt; tau9  0.04092534 0.03905785 9.875698e-02 7.865319e-02 5.486323e-02 1.660389e-01
-#&gt; tau10 0.50385598 0.49559332 2.152282e-05 4.570049e-05 4.275652e-05 2.938568e-05
-#&gt;                X07          X08          X09          X10
-#&gt; tau1  3.475107e-02 1.141770e-01 0.0256297767 0.0396728506
-#&gt; tau2  1.506818e-01 1.629738e-01 0.0473092086 0.2332367768
-#&gt; tau3  1.855217e-01 8.853543e-02 0.0966528327 0.0706367862
-#&gt; tau4  6.935228e-02 2.022970e-01 0.0523075756 0.1080431539
-#&gt; tau5  6.171905e-02 1.021598e-01 0.0984888420 0.0814123947
-#&gt; tau6  2.869126e-01 6.417962e-02 0.0390307988 0.0910330191
-#&gt; tau7  2.177447e-01 2.557753e-01 0.0648374222 0.0465229439
-#&gt; tau8  6.479818e-02 2.253885e-01 0.0271422255 0.0712927334
-#&gt; tau9  3.593420e-02 3.911715e-02 0.3401967545 0.1064564279
-#&gt; tau10 5.942162e-05 4.886792e-05 0.0001982516 0.0001047967</div></pre>
+<span class='no'>mcvis_result</span> <span class='kw'>=</span> <span class='fu'>mcvis</span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>)
+<span class='no'>mcvis_result</span></div><div class='output co'>#&gt;        X01  X02  X03  X04  X05  X06  X07  X08  X09  X10
+#&gt; tau1  0.17 0.17 0.14 0.08 0.21 0.02 0.03 0.11 0.03 0.04
+#&gt; tau2  0.04 0.04 0.06 0.17 0.03 0.07 0.15 0.16 0.05 0.23
+#&gt; tau3  0.07 0.07 0.07 0.08 0.05 0.22 0.19 0.09 0.10 0.07
+#&gt; tau4  0.08 0.08 0.13 0.05 0.09 0.14 0.07 0.20 0.05 0.11
+#&gt; tau5  0.17 0.16 0.09 0.07 0.13 0.05 0.06 0.10 0.10 0.08
+#&gt; tau6  0.10 0.10 0.04 0.03 0.16 0.07 0.29 0.06 0.04 0.09
+#&gt; tau7  0.06 0.06 0.07 0.08 0.10 0.05 0.22 0.26 0.06 0.05
+#&gt; tau8  0.02 0.02 0.17 0.23 0.09 0.09 0.06 0.23 0.03 0.07
+#&gt; tau9  0.04 0.04 0.10 0.08 0.05 0.17 0.04 0.04 0.34 0.11
+#&gt; tau10 0.50 0.50 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
