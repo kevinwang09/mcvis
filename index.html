@@ -81,26 +81,30 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p><code>mcvis</code> can be installed using the <code>devtools</code> package.</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"kevinwang09/mcvis"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"kevinwang09/mcvis"</span>)
+</pre></div>
 </div>
 <div id="a-quick-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#a-quick-example" class="anchor"></a>A quick example</h2>
 <p>Using a <code>mcvis</code> bipartite plot, variables (bottom row) that cause strong collinearity are visualised as bolded lines connecting with our “tau” statistics (top row).</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">mcvis</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">mcvis</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
 
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">1</span>)
-<span class="no">p</span> <span class="kw">=</span> <span class="fl">10</span>
-<span class="no">n</span> <span class="kw">=</span> <span class="fl">100</span>
+<span class="kw">p</span> <span class="op">=</span> <span class="fl">10</span>
+<span class="kw">n</span> <span class="op">=</span> <span class="fl">100</span>
 
-<span class="no">X</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="no">n</span>*<span class="no">p</span>), <span class="kw">ncol</span> <span class="kw">=</span> <span class="no">p</span>)
+<span class="kw">X</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span><span class="op">*</span><span class="kw">p</span>), ncol = <span class="kw">p</span>)
 <span class="co">## Inducing collinearity into the design matrix</span>
-<span class="no">X</span>[,<span class="fl">1</span>] <span class="kw">=</span> <span class="no">X</span>[,<span class="fl">2</span>] + <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="no">n</span>, <span class="fl">0</span>, <span class="fl">0.1</span>)
+<span class="kw">X</span>[,<span class="fl">1</span>] <span class="op">=</span> <span class="kw">X</span>[,<span class="fl">2</span>] <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>, <span class="fl">0</span>, <span class="fl">0.1</span>) 
 
 
-<span class="no">mcvis_result</span> <span class="kw">=</span> <span class="fu"><a href="reference/mcvis.html">mcvis</a></span>(<span class="no">X</span>)
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mcvis_result</span>)</pre></div>
+<span class="kw">mcvis_result</span> <span class="op">=</span> <span class="fu"><a href="reference/mcvis.html">mcvis</a></span>(<span class="kw">X</span>)
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mcvis_result</span>)
+</pre></div>
 <p><img src="README_files/figure-gfm/unnamed-chunk-2-1.png"><!-- --></p>
 </div>
 </div>

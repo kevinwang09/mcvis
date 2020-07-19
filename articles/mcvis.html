@@ -63,13 +63,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="mcvis_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>mcvis: Multi-collinearity Visualization</h1>
                         <h4 class="author">Kevin Wang, Chen Lin and Samuel Mueller</h4>
             
-            <h4 class="date">2020-06-04</h4>
+            <h4 class="date">2020-07-19</h4>
       
       
       <div class="hidden name"><code>mcvis.Rmd</code></div>
@@ -86,17 +86,18 @@
 <div id="basic-usage" class="section level1">
 <h1 class="hasAnchor">
 <a href="#basic-usage" class="anchor"></a>Basic usage</h1>
-<p>Suppose that we have a simple scenario that two predictors are highly correlated. This high correlation is a sufficient cause of collinearity which can be shown through large variances of estimated model parameters in linear regression.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co">## Simulating some data</span>
+<p>Suppose that we have a simple scenario that one predictor <span class="math inline">\(X_1\)</span> is almost linearly dependent on another two predictors <span class="math inline">\(X_2\)</span> and <span class="math inline">\(X_3\)</span>, thus <span class="math inline">\(X_1\)</span> is strongly correlated with these two predictors. The dependence among these three variables is a sufficient cause for collinearity which can be shown through large variances of estimated model parameters in linear regression. We illustrate this with a simple example:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co">## Simulating some data</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">1</span>)
-<span class="no">p</span> <span class="kw">=</span> <span class="fl">6</span>
-<span class="no">n</span> <span class="kw">=</span> <span class="fl">100</span>
+<span class="kw">p</span> <span class="op">=</span> <span class="fl">6</span>
+<span class="kw">n</span> <span class="op">=</span> <span class="fl">100</span>
 
-<span class="no">X</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="no">n</span>*<span class="no">p</span>), <span class="kw">ncol</span> <span class="kw">=</span> <span class="no">p</span>)
-<span class="no">X</span>[,<span class="fl">1</span>] <span class="kw">=</span> <span class="no">X</span>[,<span class="fl">2</span>] + <span class="no">X</span>[,<span class="fl">3</span>] + <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="no">n</span>, <span class="fl">0</span>, <span class="fl">0.01</span>)
+<span class="kw">X</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span><span class="op">*</span><span class="kw">p</span>), ncol = <span class="kw">p</span>)
+<span class="kw">X</span>[,<span class="fl">1</span>] <span class="op">=</span> <span class="kw">X</span>[,<span class="fl">2</span>] <span class="op">+</span> <span class="kw">X</span>[,<span class="fl">3</span>] <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>, <span class="fl">0</span>, <span class="fl">0.01</span>)
 
-<span class="no">y</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="no">n</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="no">y</span> ~ <span class="no">X</span>))
+<span class="kw">y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">y</span> <span class="op">~</span> <span class="kw">X</span>))
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; lm(formula = y ~ X)</span>
@@ -117,37 +118,45 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Residual standard error: 1.094 on 93 degrees of freedom</span>
 <span class="co">#&gt; Multiple R-squared:  0.06683,    Adjusted R-squared:  0.006628 </span>
-<span class="co">#&gt; F-statistic:  1.11 on 6 and 93 DF,  p-value: 0.3625</span></pre></body></html></div>
-<p>The <code>mcvis</code> method highlights the major collinearity-causing variables on a bipartite graph. There are three major components of this graph: + the top row is the “tau” statistics which measure the extent of collinearity in the data. By default, only one tau statistic is shown. + the bottom row is the original variables + the two rows are linked through the MC-indices that we have developed, which are represented as lines of different shades. Darker lines implies larger values of MC-index and stronger the cause of collinearity.</p>
-<p>If you are interested in how MC-index is calculated, our paper is published as <em>Lin, C., Wang, K. Y. X., &amp; Mueller, S. (2020). mcvis: A new framework for collinearity discovery, diagnostic and visualization. Journal of Computational and Graphical Statistics, In Press.</em></p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">mcvis</span>)
-<span class="no">mcvis_result</span> <span class="kw">=</span> <span class="fu"><a href="../reference/mcvis.html">mcvis</a></span>(<span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>)
+<span class="co">#&gt; F-statistic:  1.11 on 6 and 93 DF,  p-value: 0.3625</span>
+</pre></div>
+<p>The <code>mcvis</code> method highlights the major collinearity-causing variables on a bipartite graph. There are three major components of this graph: + the top row renders the “tau” statistics and by default, only one tau statistic is shown (<span class="math inline">\(\tau_p\)</span>, where <span class="math inline">\(p\)</span> is the number of predictors). This tau statistic measures the extent of collinearity in the data and relates to the eigenvalues of the correlation matrix in <span class="math inline">\(X\)</span>. + the bottom row renders all original predictors. + the two rows are linked through the MC-indices that we have developed, which are represented as lines of different shades and thickness. Darker lines implies larger values of the MC-index indicate what predictor contribute more to causing collinearity.</p>
+<p>If you are interested in how the tau statistics and the resampling-based MC-index are calculated, our paper is published as <em>Lin, C., Wang, K. Y. X., &amp; Mueller, S. (2020). mcvis: A new framework for collinearity discovery, diagnostic and visualization. <em>Journal of Computational and Graphical Statistics</em>, <a href="https://doi.org/10.1080/10618600.2020.1779729" class="uri">https://doi.org/10.1080/10618600.2020.1779729</a></em></p>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">mcvis</span>)
+<span class="kw">mcvis_result</span> <span class="op">=</span> <span class="fu"><a href="../reference/mcvis.html">mcvis</a></span>(X = <span class="kw">X</span>)
 
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">mcvis_result</span>)</pre></body></html></div>
-<p><img src="mcvis_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r">
-<span class="no">mcvis_result</span>
+<span class="kw">mcvis_result</span>
 <span class="co">#&gt;       X01  X02  X03  X04  X05  X06</span>
 <span class="co">#&gt; tau1 0.49 0.26 0.20 0.00 0.02 0.02</span>
 <span class="co">#&gt; tau2 0.37 0.21 0.15 0.17 0.05 0.05</span>
 <span class="co">#&gt; tau3 0.41 0.20 0.24 0.05 0.06 0.04</span>
 <span class="co">#&gt; tau4 0.15 0.14 0.06 0.23 0.22 0.20</span>
 <span class="co">#&gt; tau5 0.04 0.01 0.02 0.46 0.28 0.20</span>
-<span class="co">#&gt; tau6 0.51 0.25 0.24 0.00 0.00 0.00</span></pre></body></html></div>
-<p>We also provide a ggplot version of the mcvis graph.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mcvis_result</span>)</pre></body></html></div>
+<span class="co">#&gt; tau6 0.51 0.25 0.24 0.00 0.00 0.00</span>
+</pre></div>
+<p>This matrix of MC-indices is the main numeric output of <code>mcvis</code> and our visualisation techniques are focused on visualising this matrix. Below is a bipartite graph visualising the last row of this matrix, which is the main visualisation plot of <code>mcvis</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">mcvis_result</span>)
+</pre></div>
 <p><img src="mcvis_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p>We also provide a ggplot version of the mcvis bipartite graph.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mcvis_result</span>)
+</pre></div>
+<p><img src="mcvis_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
 <div id="extension-why-not-just-look-at-the-correlation-matrix" class="section level1">
 <h1 class="hasAnchor">
 <a href="#extension-why-not-just-look-at-the-correlation-matrix" class="anchor"></a>(Extension) why not just look at the correlation matrix?</h1>
-<p>In practice, high correlation between variables is not a necessary criterion for collinearity. In the <code>mplot</code> package, a simulated data was created with each of its column being a linear combination of other columns. In this case, the cause of the collinearity is not clear from the correlation matrix.</p>
-<p>The <code>mcvis</code> visualisation plot identified that the 8th variable is the main cause of collinearity of this data. Upon consultation with the data generation in this simulation, we see that the x8 is a linear combination of all other predictor variables.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">mplot</span>)
+<p>In practice, high correlation between variables is not a necessary criterion for collinearity. In the <code>mplot</code> package (Tarr et. al. 2018), a simulated data was created with many of its columns being a linear combination of other columns plus noise. In this case, the cause of the collinearity is not clear from the correlation matrix.</p>
+<p>The <code>mcvis</code> visualisation plot identified that the 8th variable (x8) is the main cause of collinearity of this data. Upon consultation with the data generation in this simulation, we see that x8 is a linear combination of all other predictor variables (plus noise).</p>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://garthtarr.github.io/mplot">mplot</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"artificialeg"</span>)
-<span class="no">X</span> <span class="kw">=</span> <span class="no">artificialeg</span>[,<span class="fl">1</span>:<span class="fl">9</span>]
-<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(<span class="no">X</span>), <span class="fl">2</span>)
+<span class="kw">X</span> <span class="op">=</span> <span class="kw">artificialeg</span>[,<span class="fl">1</span><span class="op">:</span><span class="fl">9</span>]
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span>(<span class="kw">X</span>), <span class="fl">2</span>)
 <span class="co">#&gt;       x1    x2    x3    x4    x5    x6    x7    x8    x9</span>
 <span class="co">#&gt; x1  1.00  0.00  0.14 -0.07 -0.02 -0.37  0.46  0.36 -0.22</span>
 <span class="co">#&gt; x2  0.00  1.00  0.31  0.30 -0.60  0.00 -0.29  0.24  0.53</span>
@@ -159,34 +168,54 @@
 <span class="co">#&gt; x8  0.36  0.24 -0.01 -0.07 -0.30 -0.50 -0.43  1.00  0.27</span>
 <span class="co">#&gt; x9 -0.22  0.53  0.13  0.62 -0.75 -0.08 -0.29  0.27  1.00</span>
 
-<span class="no">mcvis_result</span> <span class="kw">=</span> <span class="fu"><a href="../reference/mcvis.html">mcvis</a></span>(<span class="no">X</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">mcvis_result</span>)</pre></body></html></div>
-<p><img src="mcvis_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mcvis_result</span>)</pre></body></html></div>
-<p><img src="mcvis_files/figure-html/unnamed-chunk-4-2.png" width="700"></p>
+<span class="kw">mcvis_result</span> <span class="op">=</span> <span class="fu"><a href="../reference/mcvis.html">mcvis</a></span>(<span class="kw">X</span>)
+<span class="kw">mcvis_result</span>
+<span class="co">#&gt;        x1   x2   x3   x4   x5   x6   x7   x8   x9</span>
+<span class="co">#&gt; tau1 0.09 0.07 0.13 0.08 0.31 0.12 0.09 0.09 0.02</span>
+<span class="co">#&gt; tau2 0.16 0.02 0.15 0.06 0.02 0.36 0.03 0.16 0.02</span>
+<span class="co">#&gt; tau3 0.05 0.04 0.11 0.14 0.10 0.30 0.21 0.04 0.01</span>
+<span class="co">#&gt; tau4 0.04 0.11 0.16 0.11 0.02 0.36 0.10 0.07 0.03</span>
+<span class="co">#&gt; tau5 0.07 0.05 0.06 0.20 0.24 0.19 0.11 0.03 0.05</span>
+<span class="co">#&gt; tau6 0.10 0.05 0.20 0.04 0.26 0.17 0.03 0.06 0.10</span>
+<span class="co">#&gt; tau7 0.04 0.18 0.29 0.13 0.10 0.06 0.06 0.06 0.09</span>
+<span class="co">#&gt; tau8 0.21 0.07 0.28 0.03 0.06 0.23 0.05 0.05 0.04</span>
+<span class="co">#&gt; tau9 0.01 0.01 0.26 0.00 0.02 0.31 0.02 0.35 0.02</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">mcvis_result</span>)
+</pre></div>
+<p><img src="mcvis_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mcvis_result</span>)
+</pre></div>
+<p><img src="mcvis_files/figure-html/unnamed-chunk-5-2.png" width="700"></p>
 </div>
 <div id="shiny-implementation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#shiny-implementation" class="anchor"></a>Shiny implementation</h1>
 <p>We also offer a shiny app implementation of <code>mcvis</code> in our package. Suppose that we have a <code>mcvis_result</code> object stored in the memory of <code>R</code>. You can simply call the function <code>shiny_mcvis</code> to load up a Shiny app.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span>(<span class="no">mcvis_result</span>)
-<span class="co">#&gt; [1] "mcvis"</span></pre></body></html></div>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="../reference/shiny_mcvis.html">shiny_mcvis</a></span>(<span class="no">mcvis_result</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span>(<span class="kw">mcvis_result</span>)
+<span class="co">#&gt; [1] "mcvis"</span>
+</pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fu"><a href="../reference/shiny_mcvis.html">shiny_mcvis</a></span>(<span class="kw">mcvis_result</span>)
+</pre></div>
 </div>
 <div id="reference" class="section level1">
 <h1 class="hasAnchor">
 <a href="#reference" class="anchor"></a>Reference</h1>
 <ul>
-<li><em>Lin, C., Wang, K. Y. X., &amp; Mueller, S. (2020). mcvis: A new framework for collinearity discovery, diagnostic and visualization. Journal of Computational and Graphical Statistics, In Press.</em></li>
+<li><p><em>Lin, C., Wang, K. Y. X., &amp; Mueller, S. (2020). mcvis: A new framework for collinearity discovery, diagnostic and visualization. <em>Journal of Computational and Graphical Statistics</em>, <a href="https://doi.org/10.1080/10618600.2020.1779729" class="uri">https://doi.org/10.1080/10618600.2020.1779729</a></em></p></li>
+<li><p><em>Tarr G, Müller S, Welsh AH (2018). mplot: An R Package for Graphical Model Stability and Variable Selection Procedures. Journal of Statistical Software, 83(9), 1-28. doi: 10.18637/jss.v083.i09 (URL: <a href="https://doi.org/10.18637/jss.v083.i09" class="uri">https://doi.org/10.18637/jss.v083.i09</a>)</em>.</p></li>
 </ul>
 </div>
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session Info</h1>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()
-<span class="co">#&gt; R version 4.0.0 (2020-04-24)</span>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()
+<span class="co">#&gt; R version 4.0.2 (2020-06-22)</span>
 <span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
-<span class="co">#&gt; Running under: macOS Catalina 10.15.4</span>
+<span class="co">#&gt; Running under: macOS Catalina 10.15.5</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Matrix products: default</span>
 <span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib</span>
@@ -199,31 +228,32 @@
 <span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt; [1] mplot_1.0.4   ggplot2_3.3.1 mcvis_1.0.4  </span>
+<span class="co">#&gt; [1] mplot_1.0.4   ggplot2_3.3.2 mcvis_1.0.4  </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] tidyselect_1.1.0     xfun_0.14            purrr_0.3.4         </span>
+<span class="co">#&gt;  [1] tidyselect_1.1.0     xfun_0.15            purrr_0.3.4         </span>
 <span class="co">#&gt;  [4] reshape2_1.4.4       lattice_0.20-41      colorspace_1.4-1    </span>
-<span class="co">#&gt;  [7] vctrs_0.3.0          generics_0.0.2       htmltools_0.4.0     </span>
-<span class="co">#&gt; [10] yaml_2.2.1           rlang_0.4.6          pkgdown_1.5.1.9000  </span>
-<span class="co">#&gt; [13] pillar_1.4.4         later_1.0.0          glue_1.4.1          </span>
+<span class="co">#&gt;  [7] vctrs_0.3.2          generics_0.0.2       htmltools_0.5.0     </span>
+<span class="co">#&gt; [10] yaml_2.2.1           rlang_0.4.7          pkgdown_1.5.1.9000  </span>
+<span class="co">#&gt; [13] pillar_1.4.6         later_1.1.0.1        glue_1.4.1          </span>
 <span class="co">#&gt; [16] withr_2.2.0          RColorBrewer_1.1-2   rngtools_1.5        </span>
 <span class="co">#&gt; [19] doRNG_1.8.2          foreach_1.5.0        lifecycle_0.2.0     </span>
 <span class="co">#&gt; [22] plyr_1.8.6           stringr_1.4.0        munsell_0.5.0       </span>
 <span class="co">#&gt; [25] gtable_0.3.0         codetools_0.2-16     psych_1.9.12.31     </span>
 <span class="co">#&gt; [28] memoise_1.1.0        evaluate_0.14        labeling_0.3        </span>
-<span class="co">#&gt; [31] knitr_1.28           fastmap_1.0.1        httpuv_1.5.3.1      </span>
-<span class="co">#&gt; [34] parallel_4.0.0       Rcpp_1.0.4.6         xtable_1.8-4        </span>
-<span class="co">#&gt; [37] scales_1.1.1         backports_1.1.7      promises_1.1.0      </span>
+<span class="co">#&gt; [31] knitr_1.29           fastmap_1.0.1        httpuv_1.5.4        </span>
+<span class="co">#&gt; [34] parallel_4.0.2       Rcpp_1.0.5           xtable_1.8-4        </span>
+<span class="co">#&gt; [37] scales_1.1.1         backports_1.1.8      promises_1.1.1      </span>
 <span class="co">#&gt; [40] desc_1.2.0           tmvnsim_1.0-2        mime_0.9            </span>
-<span class="co">#&gt; [43] farver_2.0.3         fs_1.4.1             mnormt_2.0.0        </span>
+<span class="co">#&gt; [43] farver_2.0.3         fs_1.4.2             mnormt_2.0.1        </span>
 <span class="co">#&gt; [46] digest_0.6.25        stringi_1.4.6        dplyr_1.0.0         </span>
-<span class="co">#&gt; [49] shiny_1.4.0.2        grid_4.0.0           rprojroot_1.3-2     </span>
-<span class="co">#&gt; [52] tools_4.0.0          magrittr_1.5         tibble_3.0.1        </span>
-<span class="co">#&gt; [55] crayon_1.3.4         pkgconfig_2.0.3      MASS_7.3-51.5       </span>
-<span class="co">#&gt; [58] ellipsis_0.3.1       shinydashboard_0.7.1 iterators_1.0.12    </span>
-<span class="co">#&gt; [61] assertthat_0.2.1     rmarkdown_2.2        R6_2.4.1            </span>
-<span class="co">#&gt; [64] igraph_1.2.5         nlme_3.1-147         compiler_4.0.0</span></pre></body></html></div>
+<span class="co">#&gt; [49] shiny_1.5.0          grid_4.0.2           rprojroot_1.3-2     </span>
+<span class="co">#&gt; [52] tools_4.0.2          magrittr_1.5         tibble_3.0.3        </span>
+<span class="co">#&gt; [55] crayon_1.3.4         pkgconfig_2.0.3      ellipsis_0.3.1      </span>
+<span class="co">#&gt; [58] shinydashboard_0.7.1 iterators_1.0.12     assertthat_0.2.1    </span>
+<span class="co">#&gt; [61] rmarkdown_2.3        R6_2.4.1             igraph_1.2.5        </span>
+<span class="co">#&gt; [64] nlme_3.1-148         compiler_4.0.2</span>
+</pre></div>
 </div>
   </div>
 
