@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Multi-collinearity Visualization — plot.mcvis • mcvis</title>
+<title>Alternative (ggplot) visualisation for mcvis method — alt_plot • mcvis</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,19 @@
 
 
 
-<meta property="og:title" content="Multi-collinearity Visualization — plot.mcvis" />
-<meta property="og:description" content="Multi-collinearity Visualization" />
+<meta property="og:title" content="Alternative (ggplot) visualisation for mcvis method — alt_plot" />
+<meta property="og:description" content="The ggplot_mcvis function first orders the MC-index matrix columns by
+the magnitude of the MC-index for the tau1, which is the inverse of the smallest eigenvalue
+Under this ordering,
+the first entry of the matrix is classified as a &quot;category 5&quot; thickness in plotting
+Subsequently, other lines are sequentially put in the categories of
+category 5: 0.5 or above
+category 4: 0.3 - 0.5
+category 3: 0.2 - 0.3
+category 2: 0.1 - 0.2
+category 1: 0.0 - 0.1
+
+" />
 
 
 
@@ -109,17 +120,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Multi-collinearity Visualization</h1>
+    <h1>Alternative (ggplot) visualisation for mcvis method</h1>
     
-    <div class="hidden name"><code>plot.mcvis.Rd</code></div>
+    <div class="hidden name"><code>alt_plot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Multi-collinearity Visualization</p>
+    <p>The ggplot_mcvis function first orders the MC-index matrix columns by
+the magnitude of the MC-index for the tau1, which is the inverse of the smallest eigenvalue
+Under this ordering,
+the first entry of the matrix is classified as a "category 5" thickness in plotting
+Subsequently, other lines are sequentially put in the categories of</p><ul>
+<li><p>category 5: 0.5 or above</p></li>
+<li><p>category 4: 0.3 - 0.5</p></li>
+<li><p>category 3: 0.2 - 0.3</p></li>
+<li><p>category 2: 0.1 - 0.2</p></li>
+<li><p>category 1: 0.0 - 0.1</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for mcvis</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, thres = <span class='fl'>2</span><span class='op'>/</span><span class='fl'>3</span>, eig.max = <span class='fl'>1</span>, var.max = <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>x</span><span class='op'>$</span><span class='kw'>MC</span>), <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>alt_plot</span>(<span class='kw'>x</span>, eig_max = <span class='fl'>1L</span>, var_max = <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>x</span><span class='op'>$</span><span class='kw'>MC</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -129,35 +150,34 @@
       <td><p>Output of the mcvis function</p></td>
     </tr>
     <tr>
-      <th>thres</th>
-      <td><p>A parameter determining below which thickness the plotting lines hide.</p></td>
-    </tr>
-    <tr>
-      <th>eig.max</th>
+      <th>eig_max</th>
       <td><p>The maximum number of eigenvalues to be displayed on the plot.</p></td>
     </tr>
     <tr>
-      <th>var.max</th>
-      <td><p>The maximum number of variables to be displayed on the plot.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional arguments (currently unused)</p></td>
+      <th>var_max</th>
+      <td><p>The maximum number of variables (i.e. columns) to be displayed on the plot.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A ggplot</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Chen Lin, Kevin Wang, Samuel Mueller</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
 <span class='kw'>p</span> <span class='op'>=</span> <span class='fl'>10</span>
 <span class='kw'>n</span> <span class='op'>=</span> <span class='fl'>100</span>
-<span class='kw'>X</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>n</span><span class='op'>*</span><span class='kw'>p</span>), ncol = <span class='kw'>p</span>)
-<span class='kw'>X</span>[,<span class='fl'>1</span>] <span class='op'>=</span> <span class='kw'>X</span>[,<span class='fl'>2</span>] <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>n</span>, <span class='fl'>0</span>, <span class='fl'>0.1</span>)
+<span class='kw'>X</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>n</span><span class='op'>*</span><span class='kw'>p</span>, <span class='fl'>0</span>, <span class='fl'>5</span>), ncol = <span class='kw'>p</span>)
+<span class='kw'>X</span>[,<span class='fl'>1</span>] <span class='op'>=</span> <span class='kw'>X</span>[,<span class='fl'>2</span>] <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>n</span>, <span class='fl'>0</span>, <span class='fl'>1</span>)
 <span class='kw'>mcvis_result</span> <span class='op'>=</span> <span class='fu'><a href='mcvis.html'>mcvis</a></span>(<span class='kw'>X</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>mcvis_result</span>, thres = <span class='fl'>1</span>)</div><div class='img'><img src='plot.mcvis-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>alt_plot</span>(<span class='kw'>mcvis_result</span>)</div><div class='img'><img src='alt_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>X</span>[,<span class='fl'>1</span>] <span class='op'>=</span> <span class='kw'>X</span>[,<span class='fl'>2</span>] <span class='op'>+</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>n</span>, <span class='fl'>0</span>, <span class='fl'>100</span>)
+<span class='kw'>mcvis_result2</span> <span class='op'>=</span> <span class='fu'><a href='mcvis.html'>mcvis</a></span>(<span class='kw'>X</span>)
+<span class='fu'>alt_plot</span>(<span class='kw'>mcvis_result2</span>)</div><div class='img'><img src='alt_plot-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
