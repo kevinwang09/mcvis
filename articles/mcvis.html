@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcvis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.6</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@
       <h1 data-toc-skip>mcvis: Multi-collinearity Visualization</h1>
                         <h4 class="author">Kevin Wang, Chen Lin and Samuel Mueller</h4>
             
-            <h4 class="date">2020-08-16</h4>
+            <h4 class="date">2020-09-04</h4>
       
       
       <div class="hidden name"><code>mcvis.Rmd</code></div>
@@ -140,10 +140,9 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">mcvis_result</span>)
 </pre></div>
 <p><img src="mcvis_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<p>We also provide a ggplot version of the mcvis bipartite graph.</p>
+<p>We also provide a igraph version of the mcvis bipartite graph.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mcvis_result</span>)
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">mcvis_result</span>, type = <span class="st">"igraph"</span>)
 </pre></div>
 <p><img src="mcvis_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
@@ -183,20 +182,16 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span>(<span class="kw">mcvis_result</span>)
 </pre></div>
 <p><img src="mcvis_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mcvis_result</span>)
-</pre></div>
-<p><img src="mcvis_files/figure-html/unnamed-chunk-5-2.png" width="700"></p>
 </div>
 <div id="shiny-implementation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#shiny-implementation" class="anchor"></a>Shiny implementation</h1>
 <p>We also offer a shiny app implementation of <code>mcvis</code> in our package. Suppose that we have a <code>mcvis_result</code> object stored in the memory of <code>R</code>. You can simply call the function <code>shiny_mcvis</code> to load up a Shiny app.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span>(<span class="kw">mcvis_result</span>)
 <span class="co">#&gt; [1] "mcvis"</span>
 </pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit">
+<div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="fu"><a href="../reference/shiny_mcvis.html">shiny_mcvis</a></span>(<span class="kw">mcvis_result</span>)
 </pre></div>
 </div>
@@ -211,7 +206,7 @@
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session Info</h1>
-<div class="sourceCode" id="cb9"><pre class="downlit">
+<div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()
 <span class="co">#&gt; R version 4.0.2 (2020-06-22)</span>
 <span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
@@ -228,31 +223,32 @@
 <span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt; [1] mplot_1.0.4   ggplot2_3.3.2 mcvis_1.0.5  </span>
+<span class="co">#&gt; [1] mplot_1.0.4 mcvis_1.0.6</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
 <span class="co">#&gt;  [1] tidyselect_1.1.0     xfun_0.16            purrr_0.3.4         </span>
 <span class="co">#&gt;  [4] reshape2_1.4.4       lattice_0.20-41      colorspace_1.4-1    </span>
-<span class="co">#&gt;  [7] vctrs_0.3.2          generics_0.0.2       htmltools_0.5.0     </span>
+<span class="co">#&gt;  [7] vctrs_0.3.4          generics_0.0.2       htmltools_0.5.0     </span>
 <span class="co">#&gt; [10] yaml_2.2.1           rlang_0.4.7          pkgdown_1.5.1.9000  </span>
-<span class="co">#&gt; [13] pillar_1.4.6         later_1.1.0.1        glue_1.4.1          </span>
-<span class="co">#&gt; [16] withr_2.2.0          RColorBrewer_1.1-2   rngtools_1.5        </span>
-<span class="co">#&gt; [19] doRNG_1.8.2          foreach_1.5.0        lifecycle_0.2.0     </span>
-<span class="co">#&gt; [22] plyr_1.8.6           stringr_1.4.0        munsell_0.5.0       </span>
-<span class="co">#&gt; [25] gtable_0.3.0         codetools_0.2-16     psych_2.0.7         </span>
+<span class="co">#&gt; [13] pillar_1.4.6         later_1.1.0.1        glue_1.4.2          </span>
+<span class="co">#&gt; [16] RColorBrewer_1.1-2   rngtools_1.5         doRNG_1.8.2         </span>
+<span class="co">#&gt; [19] foreach_1.5.0        lifecycle_0.2.0      plyr_1.8.6          </span>
+<span class="co">#&gt; [22] stringr_1.4.0        munsell_0.5.0        gtable_0.3.0        </span>
+<span class="co">#&gt; [25] ragg_0.3.1           codetools_0.2-16     psych_2.0.7         </span>
 <span class="co">#&gt; [28] memoise_1.1.0        evaluate_0.14        labeling_0.3        </span>
 <span class="co">#&gt; [31] knitr_1.29           fastmap_1.0.1        httpuv_1.5.4        </span>
 <span class="co">#&gt; [34] parallel_4.0.2       Rcpp_1.0.5           xtable_1.8-4        </span>
-<span class="co">#&gt; [37] scales_1.1.1         backports_1.1.8      promises_1.1.1      </span>
-<span class="co">#&gt; [40] desc_1.2.0           tmvnsim_1.0-2        mime_0.9            </span>
-<span class="co">#&gt; [43] farver_2.0.3         fs_1.5.0             mnormt_2.0.1        </span>
-<span class="co">#&gt; [46] digest_0.6.25        stringi_1.4.6        dplyr_1.0.1         </span>
-<span class="co">#&gt; [49] shiny_1.5.0          grid_4.0.2           rprojroot_1.3-2     </span>
-<span class="co">#&gt; [52] tools_4.0.2          magrittr_1.5         tibble_3.0.3        </span>
-<span class="co">#&gt; [55] crayon_1.3.4         pkgconfig_2.0.3      ellipsis_0.3.1      </span>
-<span class="co">#&gt; [58] shinydashboard_0.7.1 iterators_1.0.12     assertthat_0.2.1    </span>
-<span class="co">#&gt; [61] rmarkdown_2.3        R6_2.4.1             igraph_1.2.5        </span>
-<span class="co">#&gt; [64] nlme_3.1-148         compiler_4.0.2</span>
+<span class="co">#&gt; [37] scales_1.1.1         backports_1.1.9      promises_1.1.1      </span>
+<span class="co">#&gt; [40] desc_1.2.0           cpp11_0.2.1          tmvnsim_1.0-2       </span>
+<span class="co">#&gt; [43] farver_2.0.3         mime_0.9             systemfonts_0.3.0   </span>
+<span class="co">#&gt; [46] fs_1.5.0             mnormt_2.0.2         ggplot2_3.3.2       </span>
+<span class="co">#&gt; [49] digest_0.6.25        stringi_1.4.6        dplyr_1.0.2         </span>
+<span class="co">#&gt; [52] shiny_1.5.0          grid_4.0.2           rprojroot_1.3-2     </span>
+<span class="co">#&gt; [55] tools_4.0.2          magrittr_1.5         tibble_3.0.3        </span>
+<span class="co">#&gt; [58] crayon_1.3.4         pkgconfig_2.0.3      ellipsis_0.3.1      </span>
+<span class="co">#&gt; [61] shinydashboard_0.7.1 iterators_1.0.12     assertthat_0.2.1    </span>
+<span class="co">#&gt; [64] rmarkdown_2.3        R6_2.4.1             igraph_1.2.5        </span>
+<span class="co">#&gt; [67] nlme_3.1-148         compiler_4.0.2</span>
 </pre></div>
 </div>
   </div>
