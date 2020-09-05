@@ -26,17 +26,13 @@ alt_mcvis = function(mcvis_result,
   thickness = thickness - (1/p)
 
   ggplot_size_cat = dplyr::case_when(
-    thickness <= 0.1 ~ "Not expected to cause MC",
-    thickness <= 0.2 ~ "Small chance to cause MC",
-    thickness <= 0.3 ~ "Fair chance to cause MC",
-    TRUE ~ "Strong chance to cause MC")
+    thickness <= 0.2 ~ "Small",
+    thickness <= 0.3 ~ "Medium",
+    TRUE ~ "Strong")
 
   ggplot_size_cat = factor(
     ggplot_size_cat,
-    levels = c("Not expected to cause MC",
-               "Small chance to cause MC",
-               "Fair chance to cause MC",
-               "Strong chance to cause MC"))
+    levels = c("Small", "Medium", "Strong"))
 
   plotdf = dplyr::mutate(melt_MC, thickness, ggplot_size_cat)
 
@@ -80,7 +76,7 @@ alt_mcvis = function(mcvis_result,
     scale_y_continuous(limits=c(-0.2, 1.2), expand=c(0, 0)) +
     labs(title = "Multi-collinearity plot") +
     guides(
-      colour = guide_legend(title = "MC categories"),
+      colour = guide_legend(title = "Strength of MC"),
       size = FALSE,
       linetype = FALSE,
       alpha = FALSE) +
