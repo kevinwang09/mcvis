@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Alternative (ggplot) visualisation for mcvis method — alt_mcvis • mcvis</title>
+<title>Multi-collinearity Visualization plots — alt_mcvis • mcvis</title>
 
 
 <!-- jquery -->
@@ -39,11 +39,11 @@
 
 
 
-<meta property="og:title" content="Alternative (ggplot) visualisation for mcvis method — alt_mcvis" />
-<meta property="og:description" content="Alternative (ggplot) visualisation for mcvis method
-Multi-collinearity Visualization using ggplot2
-Multi-collinearity Visualization plot using igraph
-Multi-collinearity Visualization" />
+<meta property="og:title" content="Multi-collinearity Visualization plots — alt_mcvis" />
+<meta property="og:description" content="Multi-collinearity Visualization plots
+Multi-collinearity Visualization plots
+Multi-collinearity Visualization plots
+Multi-collinearity Visualization plots" />
 
 
 
@@ -112,23 +112,23 @@ Multi-collinearity Visualization" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Alternative (ggplot) visualisation for mcvis method</h1>
+    <h1>Multi-collinearity Visualization plots</h1>
     
     <div class="hidden name"><code>plot.mcvis.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Alternative (ggplot) visualisation for mcvis method</p>
-<p>Multi-collinearity Visualization using ggplot2</p>
-<p>Multi-collinearity Visualization plot using igraph</p>
-<p>Multi-collinearity Visualization</p>
+    <p>Multi-collinearity Visualization plots</p>
+<p>Multi-collinearity Visualization plots</p>
+<p>Multi-collinearity Visualization plots</p>
+<p>Multi-collinearity Visualization plots</p>
     </div>
 
     <pre class="usage"><span class='fu'>alt_mcvis</span>(<span class='kw'>mcvis_result</span>, eig_max = <span class='fl'>1L</span>, var_max = <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>mcvis_result</span><span class='op'>$</span><span class='kw'>MC</span>))
 
 <span class='fu'>ggplot_mcvis</span>(<span class='kw'>mcvis_result</span>, eig_max = <span class='fl'>1L</span>, var_max = <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>mcvis_result</span><span class='op'>$</span><span class='kw'>MC</span>))
 
-<span class='fu'>igraph_mcvis</span>(<span class='kw'>mcvis_result</span>, eig_max = <span class='fl'>1L</span>, var_max = <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>mcvis_result</span><span class='op'>$</span><span class='kw'>MC</span>), <span class='kw'>...</span>)
+<span class='fu'>igraph_mcvis</span>(<span class='kw'>mcvis_result</span>, eig_max = <span class='fl'>1L</span>, var_max = <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>mcvis_result</span><span class='op'>$</span><span class='kw'>MC</span>))
 
 <span class='co'># S3 method for mcvis</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(
@@ -155,10 +155,6 @@ Multi-collinearity Visualization" />
       <td><p>The maximum number of variables to be displayed on the plot.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>additional arguments (currently unused)</p></td>
-    </tr>
-    <tr>
       <th>x</th>
       <td><p>Output of the mcvis function</p></td>
     </tr>
@@ -166,16 +162,18 @@ Multi-collinearity Visualization" />
       <th>type</th>
       <td><p>Plotting mcvis result using "igraph" or "ggplot". Default to "ggplot".</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments (currently unused)</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A ggplot</p>
-<p>A ggplot</p>
+    <p>A mcvis visualization plot</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Chen Lin, Kevin Wang, Samuel Mueller</p>
-<p>Chen Lin, Kevin Wang, Samuel Mueller</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
