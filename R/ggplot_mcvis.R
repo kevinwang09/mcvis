@@ -19,8 +19,8 @@ ggplot_mcvis = function(mcvis_result,
 
   #################  ggplot #######################
   plotdf = make_plotdf(MC_ordered)
-  ggplot_size_manual = c(0, 0.2, 0.5, 1, 2)
-  ggplot_alpha_manual = c(0, 0.2, 0.5, 1, 1)
+  ggplot_size_manual = c(0, 0.5, 1, 2)
+  ggplot_alpha_manual = c(0, 0.5, 1, 1)
 
   axis_1 = data.frame(x=rangeTransform(as.integer(unique(plotdf$cols))),
                       y=0, label=as.character(unique(plotdf$cols)))
@@ -52,7 +52,7 @@ ggplot_mcvis = function(mcvis_result,
     scale_y_continuous(limits=c(-0.2, 1.2), expand=c(0, 0)) +
     labs(title = "Multi-collinearity plot") +
     guides(
-      colour = guide_legend(title = "MC categories"),
+      colour = guide_legend(title = "Strength of MC"),
       size = FALSE,
       linetype = FALSE,
       alpha = FALSE) +
@@ -92,23 +92,21 @@ make_plotdf = function(MC_ordered){
   # size_cat_3 = 0.7*size_cat_5
   # size_cat_4 = 0.9*size_cat_5
 
-  size_cat_1 = 0.1
-  size_cat_2 = 0.15
-  size_cat_3 = 0.2
-  size_cat_4 = 0.4
-  size_cat_5 = 0.6
+  # size_cat_1 = 0.1
+  # size_cat_2 = 0.15
+  # size_cat_3 = 0.2
+  # size_cat_4 = 0.4
+  # size_cat_5 = 0.6
 
   ggplot_size_cat = dplyr::case_when(
-    thickness <= size_cat_1 ~ "category1",
-    thickness <= size_cat_2 ~ "category2",
-    thickness <= size_cat_3 ~ "category3",
-    thickness <= size_cat_4 ~ "category4",
-    thickness <= size_cat_5 ~ "category5",
-    thickness > size_cat_5 ~ "category5"
-  )
+    thickness <= 0.2 ~ "Small",
+    thickness <= 0.3 ~ "Medium",
+    TRUE ~ "Strong")
+
+
   ggplot_size_cat = factor(
     ggplot_size_cat,
-    levels = paste0("category", 1:5))
+    levels = c("Small", "Medium", "Strong"))
 
   plotdf = dplyr::mutate(melt_MC, thickness, ggplot_size_cat)
 

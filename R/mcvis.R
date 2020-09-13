@@ -108,7 +108,8 @@ mcvis <- function(X, sampling_method = "bootstrap", standardise_method = "studen
 
 #' @export
 print.mcvis = function(x, ...) {
-    print(round(x$MC, 2))
+    p = nrow(x$MC)
+    print(round(x$MC[p, ,drop = FALSE], 2))
 }
 
 one_mcvis_euclidean = function(X, index) {
