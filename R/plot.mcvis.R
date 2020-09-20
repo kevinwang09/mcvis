@@ -4,7 +4,7 @@
 #' @param type Plotting mcvis result using "igraph" or "ggplot". Default to "ggplot".
 #' @param eig_max The maximum number of eigenvalues to be displayed on the plot.
 #' @param var_max The maximum number of variables to be displayed on the plot.
-#' @param angle Angle for the variable name, default to 0 (horizontal)
+#' @param label_dodge If variable names are too long, it might be helpful to dodge the labelling. Default to FALSE.
 #' @param ... additional arguments (currently unused)
 #' @rdname plot.mcvis
 #' @return A mcvis visualization plot
@@ -20,10 +20,10 @@
 #' plot(mcvis_result, type = "igraph")
 #' plot(mcvis_result, type = "alt")
 plot.mcvis <- function(x, type = c("ggplot", "igraph", "alt"), eig_max = 1L, var_max = ncol(x$MC),
-                       angle = 0, ...){
+                       label_dodge = FALSE, ...){
     type = match.arg(type)
     switch(type,
-           ggplot = ggplot_mcvis(mcvis_result = x, eig_max = eig_max, var_max = var_max, angle = angle),
+           ggplot = ggplot_mcvis(mcvis_result = x, eig_max = eig_max, var_max = var_max, label_dodge = label_dodge),
            igraph = igraph_mcvis(mcvis_result = x, eig_max = eig_max, var_max = var_max),
            alt = alt_mcvis(mcvis_result = x, eig_max = eig_max, var_max = var_max))
 }

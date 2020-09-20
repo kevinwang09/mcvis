@@ -1,5 +1,5 @@
 #' @param mcvis_result Output of the mcvis function
-#' @param angle Angle for the variable name, default to 0 (horizontal)
+#' @param label_dodge If variable names are too long, it might be helpful to dodge the labelling. Default to FALSE.
 #' @import ggplot2
 #' @importFrom reshape2 melt
 #' @importFrom rlang .data
@@ -8,7 +8,7 @@
 ggplot_mcvis = function(mcvis_result,
                         eig_max = 1L,
                         var_max = ncol(mcvis_result$MC),
-                        angle = 0)
+                        label_dodge = FALSE)
   ##if eig_max==1 or var_max==1, the function fails to give an output.
 {
   MC_ordered = make_MC_ordered(
@@ -23,15 +23,22 @@ ggplot_mcvis = function(mcvis_result,
   ggplot_size_manual = c(0, 0.5, 1, 2)
   ggplot_alpha_manual = c(0, 0.5, 1, 1)
 
-  axis_1 = data.frame(x=rangeTransform(as.integer(unique(plotdf$cols))),
-                      y=0, label=as.character(unique(plotdf$cols)))
+  if(label_dodge){
+    axis_1 = data.frame(x=rangeTransform(as.integer(unique(plotdf$cols))),
+                        y=0, label=as.character(unique(plotdf$cols)),
+                        y_jitter = rep(c(0, 0.1), length.out = length(plotdf$cols)))
+  } else {
+    axis_1 = data.frame(x=rangeTransform(as.integer(unique(plotdf$cols))),
+                        y=0, label=as.character(unique(plotdf$cols)),
+                        y_jitter = rep(0, length.out = length(plotdf$cols)))
+  }
 
   axis_2 = data.frame(x=rangeTransform(as.integer(unique(plotdf$taus))),
                       y=1, label=as.character(unique(plotdf$taus)))
 
   linetype_manual = c("dotted","solid")
   names(linetype_manual) = c("others", taup)
-
+  # browser()
   gg = ggplot2::ggplot(data=plotdf) +
     geom_segment(aes(
       x=.data$cols_norm, xend=.data$taus_norm,
@@ -40,7 +47,7 @@ ggplot_mcvis = function(mcvis_result,
       size = .data$ggplot_size_cat,
       alpha = .data$ggplot_size_cat,
       linetype = .data$linetype)) +
-    geom_text(data=axis_1, aes(label=.data$label, x=.data$x, y=.data$y - 0.075), angle = angle) +
+    geom_text(data=axis_1, aes(label=.data$label, x=.data$x, y=.data$y - 0.075 - .data$y_jitter)) +
     geom_text(data=axis_2, aes(label=.data$label, x=.data$x, y=.data$y + 0.075)) +
     geom_segment(data=axis_1, aes(x=.data$x, xend=.data$x, y=.data$y, yend=.data$y-0.025), size=0.7) +
     geom_segment(data=axis_2, aes(x=.data$x, xend=.data$x, y=.data$y, yend=.data$y+0.025), size=0.7) +
@@ -50,7 +57,6 @@ ggplot_mcvis = function(mcvis_result,
     scale_size_manual(values = ggplot_size_manual, drop = FALSE) +
     scale_alpha_manual(values = ggplot_alpha_manual, drop = FALSE) +
     scale_linetype_manual(values = linetype_manual, drop = FALSE) +
-    scale_y_continuous(limits=c(-0.2, 1.2), expand=c(0, 0)) +
     labs(title = "Multi-collinearity plot") +
     guides(
       colour = guide_legend(title = "Strength of MC"),
@@ -61,9 +67,17 @@ ggplot_mcvis = function(mcvis_result,
     theme(axis.title=element_blank(),
           axis.text=element_blank(),
           axis.ticks=element_blank(),
-          panel.grid=element_blank())
-  gg
-  return(gg)
+          panel.grid=element_blank(),
+          legend.position = "bottom")
+
+  if(label_dodge){
+    result = gg + scale_y_continuous(limits=c(-0.35, 1.2), expand = c(0, 0)) +
+      scale_x_continuous(limits=c(-0.2, 1.2), expand = c(0, 0))
+  } else {
+    result = gg + scale_y_continuous(limits=c(-0.2, 1.2), expand = c(0, 0))
+  }
+
+  return(result)
 }
 
 rangeTransform = function(x){
