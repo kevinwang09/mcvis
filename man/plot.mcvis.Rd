@@ -10,7 +10,12 @@
 \usage{
 alt_mcvis(mcvis_result, eig_max = 1L, var_max = ncol(mcvis_result$MC))
 
-ggplot_mcvis(mcvis_result, eig_max = 1L, var_max = ncol(mcvis_result$MC))
+ggplot_mcvis(
+  mcvis_result,
+  eig_max = 1L,
+  var_max = ncol(mcvis_result$MC),
+  angle = 0
+)
 
 igraph_mcvis(mcvis_result, eig_max = 1L, var_max = ncol(mcvis_result$MC))
 
@@ -19,6 +24,7 @@ igraph_mcvis(mcvis_result, eig_max = 1L, var_max = ncol(mcvis_result$MC))
   type = c("ggplot", "igraph", "alt"),
   eig_max = 1L,
   var_max = ncol(x$MC),
+  angle = 0,
   ...
 )
 }
@@ -28,6 +34,8 @@ igraph_mcvis(mcvis_result, eig_max = 1L, var_max = ncol(mcvis_result$MC))
 \item{eig_max}{The maximum number of eigenvalues to be displayed on the plot.}
 
 \item{var_max}{The maximum number of variables to be displayed on the plot.}
+
+\item{angle}{Angle for the variable name, default to 0 (horizontal)}
 
 \item{x}{Output of the mcvis function}
 
@@ -39,8 +47,6 @@ igraph_mcvis(mcvis_result, eig_max = 1L, var_max = ncol(mcvis_result$MC))
 A mcvis visualization plot
 }
 \description{
-Multi-collinearity Visualization plots
-
 Multi-collinearity Visualization plots
 
 Multi-collinearity Visualization plots

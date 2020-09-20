@@ -1,5 +1,5 @@
-#' @title Multi-collinearity Visualization plots
 #' @param mcvis_result Output of the mcvis function
+#' @param angle Angle for the variable name, default to 0 (horizontal)
 #' @import ggplot2
 #' @importFrom reshape2 melt
 #' @importFrom rlang .data
@@ -7,7 +7,8 @@
 #' @export
 ggplot_mcvis = function(mcvis_result,
                         eig_max = 1L,
-                        var_max = ncol(mcvis_result$MC))
+                        var_max = ncol(mcvis_result$MC),
+                        angle = 0)
   ##if eig_max==1 or var_max==1, the function fails to give an output.
 {
   MC_ordered = make_MC_ordered(
@@ -39,7 +40,7 @@ ggplot_mcvis = function(mcvis_result,
       size = .data$ggplot_size_cat,
       alpha = .data$ggplot_size_cat,
       linetype = .data$linetype)) +
-    geom_text(data=axis_1, aes(label=.data$label, x=.data$x, y=.data$y - 0.075)) +
+    geom_text(data=axis_1, aes(label=.data$label, x=.data$x, y=.data$y - 0.075), angle = angle) +
     geom_text(data=axis_2, aes(label=.data$label, x=.data$x, y=.data$y + 0.075)) +
     geom_segment(data=axis_1, aes(x=.data$x, xend=.data$x, y=.data$y, yend=.data$y-0.025), size=0.7) +
     geom_segment(data=axis_2, aes(x=.data$x, xend=.data$x, y=.data$y, yend=.data$y+0.025), size=0.7) +
