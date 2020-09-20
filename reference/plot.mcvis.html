@@ -128,7 +128,7 @@ Multi-collinearity Visualization plots" />
   <span class='kw'>mcvis_result</span>,
   eig_max = <span class='fl'>1L</span>,
   var_max = <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>mcvis_result</span><span class='op'>$</span><span class='kw'>MC</span>),
-  angle = <span class='fl'>0</span>
+  label_dodge = <span class='fl'>FALSE</span>
 )
 
 <span class='fu'>igraph_mcvis</span>(<span class='kw'>mcvis_result</span>, eig_max = <span class='fl'>1L</span>, var_max = <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>mcvis_result</span><span class='op'>$</span><span class='kw'>MC</span>))
@@ -139,7 +139,7 @@ Multi-collinearity Visualization plots" />
   type = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ggplot"</span>, <span class='st'>"igraph"</span>, <span class='st'>"alt"</span>),
   eig_max = <span class='fl'>1L</span>,
   var_max = <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='kw'>x</span><span class='op'>$</span><span class='kw'>MC</span>),
-  angle = <span class='fl'>0</span>,
+  label_dodge = <span class='fl'>FALSE</span>,
   <span class='kw'>...</span>
 )</pre>
 
@@ -159,8 +159,8 @@ Multi-collinearity Visualization plots" />
       <td><p>The maximum number of variables to be displayed on the plot.</p></td>
     </tr>
     <tr>
-      <th>angle</th>
-      <td><p>Angle for the variable name, default to 0 (horizontal)</p></td>
+      <th>label_dodge</th>
+      <td><p>If variable names are too long, it might be helpful to dodge the labelling. Default to FALSE.</p></td>
     </tr>
     <tr>
       <th>x</th>
