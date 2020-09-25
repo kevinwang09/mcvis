@@ -50,7 +50,7 @@ The `mcvis` method highlights the major collinearity-causing variables on a bipa
  + the two rows are linked through the MC-indices that we have developed, which are represented as lines of different shades and thickness. Darker lines implies larger values of the MC-index indicate what predictor contribute more to causing collinearity. 
  
  
-If you are interested in how the tau statistics and the resampling-based MC-index are calculated, our paper is published as *Lin, C., Wang, K. Y. X., & Mueller, S. (2020). mcvis: A new framework for collinearity discovery, diagnostic and visualization. _Journal of Computational and Graphical Statistics_, https://doi.org/10.1080/10618600.2020.1779729*
+If you are interested in how the tau statistics and the resampling-based MC-index are calculated, our paper is published as *Lin, C., Wang, K. Y. X., & Mueller, S. (2020). mcvis: A new framework for collinearity discovery, diagnostic and visualization. _Journal of Computational and Graphical Statistics_*
 
 ```{r}
 library(mcvis)
@@ -105,11 +105,10 @@ shiny_mcvis(mcvis_result)
 
 # Reference
 
-+ *Lin, C., Wang, K. Y. X., & Mueller, S. (2020). mcvis: A new framework for collinearity discovery, diagnostic and visualization. _Journal of Computational and Graphical Statistics_, https://doi.org/10.1080/10618600.2020.1779729*
++ *Lin, C., Wang, K. Y. X., & Mueller, S. (2020). mcvis: A new framework for collinearity discovery, diagnostic and visualization. _Journal of Computational and Graphical Statistics_, In Press. URL: https://doi.org/10.1080/10618600.2020.1779729*
 
-+ *Tarr G, Müller S, Welsh AH (2018). mplot: An R Package for Graphical Model Stability and Variable
-Selection Procedures. Journal of Statistical Software, 83(9), 1-28. doi: 10.18637/jss.v083.i09
-(URL: https://doi.org/10.18637/jss.v083.i09)*.
++ *Tarr G, Mueller S, Welsh AH (2018). mplot: An R Package for Graphical Model Stability and Variable
+Selection Procedures. Journal of Statistical Software, 83(9), 1-28. URL: https://doi.org/10.18637/jss.v083.i09*
 
 
 

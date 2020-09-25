@@ -47,7 +47,8 @@ mcvis <- function(X, sampling_method = "bootstrap", standardise_method = "studen
     p = ncol(X)  ## We now enforce no intercept terms
 
     if (is.null(colnames(X))) {
-        col_names = sprintf("X%02d", seq_len(p))
+        n_digits = floor(log10(p)) + 1L
+        col_names = sprintf(paste0("X%0", n_digits, "d"), seq_len(p))
     } else {
         col_names = colnames(X)
     }
