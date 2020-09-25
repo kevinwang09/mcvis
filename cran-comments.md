@@ -1,10 +1,10 @@
 ## Test environments
-* local R installation, R 3.6.2
-* ubuntu 16.04 (on travis-ci), R 3.6.2
-* win-builder (devel)
+* ubuntu 16.04 (GitHub Actions), R 4.0.2
+* MacOS (GitHub Actions), R 4.0.2
+* Windows (GitHub Actions), R 4.0.2
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 note
 
-* This is a new release.
+* This updates CRAN version to v1.0.6.
