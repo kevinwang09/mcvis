@@ -79,12 +79,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/mcvis.html">Get started</a>
 </li>
 <li>
@@ -118,7 +112,7 @@
     <p>Shiny app for mcvis exploration</p>
     </div>
 
-    <pre class="usage"><span class='fu'>shiny_mcvis</span>(<span class='kw'>mcvis_result</span>, <span class='kw'>X</span>)</pre>
+    <pre class="usage"><span class='fu'>shiny_mcvis</span><span class='op'>(</span><span class='va'>mcvis_result</span>, <span class='va'>X</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,14 +132,14 @@
     <p>Chen Lin, Kevin Wang, Samuel Mueller</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
-<span class='kw'>p</span> <span class='op'>=</span> <span class='fl'>10</span>
-<span class='kw'>n</span> <span class='op'>=</span> <span class='fl'>100</span>
-<span class='kw'>X</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='kw'>n</span><span class='op'>*</span><span class='kw'>p</span>), ncol = <span class='kw'>p</span>)
-<span class='kw'>mcvis_result</span> <span class='op'>=</span> <span class='fu'><a href='mcvis.html'>mcvis</a></span>(<span class='kw'>X</span>)
-<span class='fu'>shiny_mcvis</span>(mcvis_result = <span class='kw'>mcvis_result</span>, X = <span class='kw'>X</span>)
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>p</span> <span class='op'>=</span> <span class='fl'>10</span>
+<span class='va'>n</span> <span class='op'>=</span> <span class='fl'>100</span>
+<span class='va'>X</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>*</span><span class='va'>p</span><span class='op'>)</span>, ncol <span class='op'>=</span> <span class='va'>p</span><span class='op'>)</span>
+<span class='va'>mcvis_result</span> <span class='op'>=</span> <span class='fu'><a href='mcvis.html'>mcvis</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
+<span class='fu'>shiny_mcvis</span><span class='op'>(</span>mcvis_result <span class='op'>=</span> <span class='va'>mcvis_result</span>, X <span class='op'>=</span> <span class='va'>X</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
