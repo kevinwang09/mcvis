@@ -8,6 +8,6 @@ bibentry(bibtype = "Article",
                     ),
          year = "2020",
          journal = "Journal of Computational and Graphical Statistics",
-         volumn = "In Press",
-         doi = "https://doi.org/10.1080/10618600.2020.1779729",
+         volume = "In Press",
+         doi = "10.1080/10618600.2020.1779729",
          header = "To cite mcvis in publications please use: Lin, C., Wang, K. Y. X., & Mueller, S. (2020). mcvis: A new framework for collinearity discovery, diagnostic and visualization. Journal of Computational and Graphical Statistics, In Press.")

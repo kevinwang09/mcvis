@@ -3,11 +3,15 @@ Type: Package
 Title: Multi-Collinearity Visualization
 Version: 1.0.6
 Authors@R: c(
-    person(given = "Kevin", family = "Wang", email = "kevin.wang09@gmail.com", role = c("aut", "cre")),
-    person(given = "Chen", family = "Lin", email = "16300180053@fudan.edu.cn", role = c("aut")),
-    person(given = "Samuel", family = "Mueller", email = "samuel.mueller@sydney.edu.au", role = c("aut"))
+    person(given = "Kevin", family = "Wang", 
+    email = "kevin.wang09@gmail.com", role = c("aut", "cre")),
+    person(given = "Chen", family = "Lin", 
+    email = "16300180053@fudan.edu.cn", role = c("aut")),
+    person(given = "Samuel", family = "Mueller", 
+    email = "samuel.mueller@sydney.edu.au", role = c("aut"))
     )
-Description: Visualize the relationship between linear regression variables and causes of multi-collinearity.
+Description: Visualize the relationship between linear regression variables and 
+causes of multi-collinearity. Implements the method in Lin et. al. (2020) <doi:10.1080/10618600.2020.1779729> and other classical measures. 
 Encoding: UTF-8
 Imports:
   assertthat,
