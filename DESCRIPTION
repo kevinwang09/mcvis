@@ -10,8 +10,8 @@ Authors@R: c(
     person(given = "Samuel", family = "Mueller", 
     email = "samuel.mueller@sydney.edu.au", role = c("aut"))
     )
-Description: Visualize the relationship between linear regression variables and 
-causes of multi-collinearity. Implements the method in Lin et. al. (2020) <doi:10.1080/10618600.2020.1779729> and other classical measures. 
+Description: Visualize the relationship between linear regression variables and causes of multi-collinearity. 
+    Implements the method in Lin et. al. (2020) <doi:10.1080/10618600.2020.1779729>. 
 Encoding: UTF-8
 Imports:
   assertthat,
